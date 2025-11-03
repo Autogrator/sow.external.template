@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI O.NE SOW Survey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .progress-container {
+            padding: 30px 40px 20px;
+            background: #f8f9fa;
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #495057;
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #1e3a8a 0%, #1e40af 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section-header {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #1e3a8a;
+        }
+        
+        .section-header h2 {
+            font-size: 24px;
+            color: #212529;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .required {
+            color: #dc3545;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #1e3a8a;
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .radio-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .radio-option label {
+            margin: 0;
+            font-weight: 400;
+            cursor: pointer;
+        }
+        
+        .info-box {
+            margin-top: 25px;
+            padding: 20px;
+            background: #e7f3ff;
+            border: 2px solid #b3d9ff;
+            border-radius: 8px;
+        }
+        
+        .info-box h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #212529;
+        }
+        
+        .info-box p {
+            font-size: 13px;
+            color: #495057;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-secondary {
+            background: #e9ecef;
+            color: #495057;
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            background: #dee2e6;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .final-instructions {
+            margin-top: 30px;
+            padding: 25px;
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+        }
+        
+        .final-instructions h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #212529;
+        }
+        
+        .final-instructions ol {
+            margin-left: 20px;
+            color: #495057;
+        }
+        
+        .final-instructions li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI O.NE SOW Survey</h1>
+            <p>Complete this form to generate your Statement of Work documents</p>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-info">
+                <span id="section-counter">Section 1 of 11</span>
+                <span id="percent-complete">9% Complete</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar" style="width: 9%"></div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div id="form-sections"></div>
+            
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prev-btn" onclick="previousSection()">Previous</button>
+                <button class="btn btn-primary" id="next-btn" onclick="nextSection()">Next</button>
+                <button class="btn btn-success hidden" id="copy-btn" onclick="copyFormData()">Copy Form Data</button>
+            </div>
+            
+            <div class="final-instructions hidden" id="final-instructions">
+                <h3>Next Steps:</h3>
+                <ol>
+                    <li>Click "Copy Form Data" to copy all your responses</li>
+                    <li>Open your SOW Generator GPT in Claude</li>
+                    <li>Paste the copied data</li>
+                    <li>Receive both Internal and External SOW documents</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const formData = {
+            projectCode: '', projectTitle: '', clientName: '', effectiveDate: '', targetCompletion: '',
+            clientGoal: '', solutionDescription: '', clientSponsor: '', clientContact: '',
+            caoName: '', pmName: '', developers: '', phase1Name: '', phase1Deliverable1: '',
+            phase1Deliverable2: '', phase1Deliverable3: '', hasPhase2: 'no', phase2Name: '',
+            phase2Deliverable1: '', phase2Deliverable2: '', outOfScope1: '', outOfScope2: '',
+            outOfScope3: '', successMetric1: '', successMetric2: '', successMetric3: '',
+            projectComplexity: '', estimatedWeeks: '', clientMustProvide: '', pilotDuration: '2-4',
+            appendixAContent: '', appendixBContent: '', appendixCContent: ''
+        };
+
+        const sections = [
+            {
+                title: "Project Basics",
+                fields: [
+                    { name: 'projectCode', label: 'Project Code', placeholder: 'e.g., CCE-0001', required: true },
+                    { name: 'projectTitle', label: 'Project Title', placeholder: 'e.g., Estimation for Cost Analysis', required: true },
+                    { name: 'clientName', label: 'Client Company Name', placeholder: 'e.g., Capitol City Electrical', required: true },
+                    { name: 'effectiveDate', label: 'Start Date', type: 'date', required: true },
+                    { name: 'targetCompletion', label: 'Target Completion Date', type: 'date', required: true }
+                ]
+            },
+            {
+                title: "Project Overview",
+                fields: [
+                    { name: 'clientGoal', label: 'What is the client trying to achieve?', placeholder: 'e.g., Reduce early bid-evaluation effort and standardize bid/no-bid decisions...', type: 'textarea', required: true },
+                    { name: 'solutionDescription', label: 'Brief solution description', placeholder: 'e.g., Two-phase decision-support solution with email automation...', type: 'textarea', required: true }
+                ]
+            },
+            {
+                title: "Project Team",
+                fields: [
+                    { name: 'clientSponsor', label: 'Client Executive Sponsor (Name & Title)', placeholder: 'e.g., Jackson Speer, Executive Sponsor', required: true },
+                    { name: 'clientContact', label: 'Client Day-to-Day Contact (Name & Title)', placeholder: 'e.g., John Roland, Project Manager', required: true },
+                    { name: 'caoName', label: 'Chief AI Officer(s)', placeholder: 'e.g., John Lund, Jason Nocita', required: true },
+                    { name: 'pmName', label: 'Project Lead/PM', placeholder: 'e.g., Mona Muralidharan', required: true },
+                    { name: 'developers', label: 'Developers/Specialists', placeholder: 'e.g., Caleb Hiatt, Minh Truong', required: true }
+                ]
+            },
+            {
+                title: "Scope - Phase 1",
+                fields: [
+                    { name: 'phase1Name', label: 'Phase 1 Name', placeholder: 'e.g., Email Triage & PDF Summarization', required: true },
+                    { name: 'phase1Deliverable1', label: 'Phase 1 - Key Deliverable 1', placeholder: 'e.g., Email triage automation implementing Easy-No rules', type: 'textarea', required: true },
+                    { name: 'phase1Deliverable2', label: 'Phase 1 - Key Deliverable 2', placeholder: 'e.g., PDF/document summarization service', type: 'textarea', required: true },
+                    { name: 'phase1Deliverable3', label: 'Phase 1 - Key Deliverable 3', placeholder: 'e.g., Reporting/logging and user guide', type: 'textarea', required: true }
+                ]
+            },
+            {
+                title: "Scope - Phase 2 (Optional)",
+                fields: [
+                    { name: 'hasPhase2', label: 'Does this project have Phase 2?', type: 'radio', options: ['yes', 'no'], required: true },
+                    { name: 'phase2Name', label: 'Phase 2 Name', placeholder: 'e.g., Cost-Estimation Assist', conditional: 'hasPhase2', conditionalValue: 'yes' },
+                    { name: 'phase2Deliverable1', label: 'Phase 2 - Key Deliverable 1', placeholder: 'e.g., Cost-estimation assist prototype', type: 'textarea', conditional: 'hasPhase2', conditionalValue: 'yes' },
+                    { name: 'phase2Deliverable2', label: 'Phase 2 - Key Deliverable 2', placeholder: 'e.g., Validation plan and training materials', type: 'textarea', conditional: 'hasPhase2', conditionalValue: 'yes' }
+                ]
+            },
+            {
+                title: "Out of Scope",
+                fields: [
+                    { name: 'outOfScope1', label: 'Out of Scope Item 1', placeholder: 'e.g., Deterministic bid-price estimation', required: true },
+                    { name: 'outOfScope2', label: 'Out of Scope Item 2', placeholder: 'e.g., Detailed takeoffs', required: true },
+                    { name: 'outOfScope3', label: 'Out of Scope Item 3', placeholder: 'e.g., Third-party integrations during Phase 1', required: true }
+                ]
+            },
+            {
+                title: "Success Criteria",
+                fields: [
+                    { name: 'successMetric1', label: 'Success Metric 1', placeholder: 'e.g., ≥50% reduction in estimator time spent on initial triage', required: true },
+                    { name: 'successMetric2', label: 'Success Metric 2', placeholder: 'e.g., ≥90% correct application of Easy-No rules', required: true },
+                    { name: 'successMetric3', label: 'Success Metric 3', placeholder: 'e.g., ≥90% field-level accuracy for summary data', required: true }
+                ]
+            },
+            {
+                title: "Project Complexity",
+                fields: [
+                    { name: 'projectComplexity', label: 'Project Complexity Level', type: 'radio', options: ['Simple', 'Moderate', 'Complex'], required: true, helpText: 'Simple: Basic automation (50-80 hrs). Moderate: Multi-phase with integrations (100-150 hrs). Complex: Advanced AI/ML with multiple systems (150+ hrs)' },
+                    { name: 'estimatedWeeks', label: 'Estimated Project Duration (weeks)', type: 'number', placeholder: '8', required: true, helpText: 'Total weeks from kickoff to final handoff' }
+                ]
+            },
+            {
+                title: "Client Responsibilities",
+                fields: [
+                    { name: 'clientMustProvide', label: 'What must the client provide?', placeholder: 'e.g., 10-15 Go/No-Go transcripts, representative bid emails, IBEW jurisdiction rules...', type: 'textarea', required: true, helpText: 'List all data, access, documents, and resources the client must provide' }
+                ]
+            },
+            {
+                title: "Testing & Pilot",
+                fields: [
+                    { name: 'pilotDuration', label: 'Pilot Duration (weeks)', placeholder: '2-4', required: true }
+                ]
+            },
+            {
+                title: "Appendices Content",
+                fields: [
+                    { name: 'appendixAContent', label: 'Appendix A - Rules/Criteria to Define', placeholder: 'e.g., List the quick "easy-no" rules for immediate triage...', type: 'textarea', required: true },
+                    { name: 'appendixBContent', label: 'Appendix B - Data Points to Extract', placeholder: 'e.g., GC name, project title, bid date/time, location...', type: 'textarea', required: true },
+                    { name: 'appendixCContent', label: 'Appendix C - API & Access Requirements', placeholder: 'e.g., Access to inbound bid email inbox, representative PDF packages...', type: 'textarea', required: true }
+                ]
+            }
+        ];
+
+        let currentSection = 0;
+
+        function renderSection() {
+            const section = sections[currentSection];
+            let html = `
+                <div class="section-header">
+                    <h2>${section.title}</h2>
+                </div>
+            `;
+
+            section.fields.forEach(field => {
+                if (field.conditional && formData[field.conditional] !== field.conditionalValue) {
+                    return;
+                }
+
+                html += `<div class="form-group">`;
+                html += `<label>${field.label} ${field.required ? '<span class="required">*</span>' : ''}</label>`;
+
+                if (field.type === 'textarea') {
+                    html += `<textarea class="form-control" id="${field.name}" placeholder="${field.placeholder || ''}" oninput="updateFormData('${field.name}', this.value)">${formData[field.name]}</textarea>`;
+                } else if (field.type === 'radio') {
+                    html += `<div class="radio-group">`;
+                    field.options.forEach(option => {
+                        const checked = formData[field.name] === option ? 'checked' : '';
+                        html += `
+                            <div class="radio-option">
+                                <input type="radio" name="${field.name}" value="${option}" ${checked} onchange="updateFormData('${field.name}', '${option}')">
+                                <label>${option.charAt(0).toUpperCase() + option.slice(1)}</label>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                } else {
+                    html += `<input type="${field.type || 'text'}" class="form-control" id="${field.name}" value="${formData[field.name]}" placeholder="${field.placeholder || ''}" oninput="updateFormData('${field.name}', this.value)">`;
+                }
+
+                if (field.helpText) {
+                    html += `<div class="help-text">${field.helpText}</div>`;
+                }
+
+                html += `</div>`;
+            });
+
+            // Add info box for complexity section
+            if (currentSection === 7) {
+                html += `
+                    <div class="info-box">
+                        <h3>Complexity Guidelines</h3>
+                        <p><strong>Simple:</strong> Single-phase automation, minimal integrations (50-80 hrs)</p>
+                        <p><strong>Moderate:</strong> Multi-phase project, some integrations (100-150 hrs)</p>
+                        <p><strong>Complex:</strong> Advanced AI/ML, multiple system integrations (150+ hrs)</p>
+                        <p style="font-size: 11px; margin-top: 10px;">* The GPT will estimate detailed hours and budget based on your complexity selection</p>
+                    </div>
+                `;
+            }
+
+            document.getElementById('form-sections').innerHTML = html;
+            updateProgress();
+            updateButtons();
+        }
+
+        function updateFormData(field, value) {
+            formData[field] = value;
+            if (field === 'hasPhase2') {
+                renderSection();
+            }
+        }
+
+        function updateProgress() {
+            const percent = Math.round(((currentSection + 1) / sections.length) * 100);
+            document.getElementById('section-counter').textContent = `Section ${currentSection + 1} of ${sections.length}`;
+            document.getElementById('percent-complete').textContent = `${percent}% Complete`;
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+        }
+
+        function updateButtons() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const copyBtn = document.getElementById('copy-btn');
+            const finalInstructions = document.getElementById('final-instructions');
+
+            prevBtn.disabled = currentSection === 0;
+
+            if (currentSection === sections.length - 1) {
+                nextBtn.classList.add('hidden');
+                copyBtn.classList.remove('hidden');
+                finalInstructions.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                copyBtn.classList.add('hidden');
+                finalInstructions.classList.add('hidden');
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 0) {
+                currentSection--;
+                renderSection();
+            }
+        }
+
+        function nextSection() {
+            if (currentSection < sections.length - 1) {
+                currentSection++;
+                renderSection();
+            }
+        }
+
+        function copyFormData() {
+            const text = Object.entries(formData)
+                .map(([key, value]) => `${key}: ${value}`)
+                .join('\n');
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Form data copied to clipboard!');
+            }).catch(() => {
+                alert('Form data:\n\n' + text);
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Initialize
+        renderSection();
+    </script>
+</body>
+</html>
