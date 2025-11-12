@@ -3,273 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI O.NE SOW Survey</title>
+    <title>Autogrator - Statement of Work Survey</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
         }
-        
+
+        .container {
+            max-width: 100%;
+            width: 100%;
+            background: white;
+        }
+
         .header {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            background: linear-gradient(135deg, #16478E 0%, #0d2d5e 100%);
             color: white;
             padding: 40px;
             text-align: center;
         }
-        
+
         .header h1 {
-            font-size: 32px;
+            font-size: 2.5em;
             margin-bottom: 10px;
         }
-        
+
         .header p {
-            font-size: 16px;
-            opacity: 0.9;
+            font-size: 1.1em;
+            opacity: 0.95;
         }
-        
-        .progress-container {
-            padding: 30px 40px 20px;
-            background: #f8f9fa;
-        }
-        
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 14px;
-            color: #495057;
-        }
-        
-        .progress-bar-container {
+
+        .progress-bar {
             width: 100%;
             height: 8px;
-            background: #e9ecef;
-            border-radius: 4px;
-            overflow: hidden;
+            background: #e0e0e0;
         }
-        
-        .progress-bar {
+
+        .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #1e3a8a 0%, #1e40af 100%);
+            background: linear-gradient(90deg, #16478E 0%, #0d2d5e 100%);
             transition: width 0.3s ease;
         }
-        
-        .content {
-            padding: 40px;
+
+        .form-content {
+            padding: 40px 60px;
+            max-width: 900px;
+            margin: 0 auto;
         }
-        
-        .section-header {
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-title {
+            font-size: 1.8em;
+            color: #16478E;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: #666;
             margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #1e3a8a;
+            font-size: 1em;
         }
-        
-        .section-header h2 {
-            font-size: 24px;
-            color: #212529;
-        }
-        
+
         .form-group {
             margin-bottom: 25px;
         }
-        
-        .form-group label {
+
+        label {
             display: block;
             font-weight: 600;
-            color: #495057;
+            color: #333;
             margin-bottom: 8px;
-            font-size: 14px;
+            font-size: 1em;
         }
-        
+
         .required {
-            color: #dc3545;
+            color: #e74c3c;
         }
-        
-        .form-control {
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="date"],
+        textarea,
+        select {
             width: 100%;
             padding: 12px;
-            border: 2px solid #dee2e6;
-            border-radius: 6px;
-            font-size: 14px;
-            transition: border-color 0.2s;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+            font-family: inherit;
         }
-        
-        .form-control:focus {
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        textarea:focus,
+        select:focus {
             outline: none;
-            border-color: #1e3a8a;
+            border-color: #16478E;
         }
-        
-        textarea.form-control {
+
+        textarea {
+            min-height: 120px;
             resize: vertical;
-            min-height: 100px;
         }
-        
-        .help-text {
-            font-size: 12px;
-            color: #6c757d;
+
+        .small-note {
+            font-size: 0.85em;
+            color: #666;
+            font-style: italic;
             margin-top: 5px;
+            line-height: 1.4;
         }
-        
-        .radio-group {
+
+        .checkbox-group {
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            margin-bottom: 12px;
             display: flex;
-            gap: 20px;
+            align-items: flex-start;
         }
-        
-        .radio-option {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .radio-option input[type="radio"] {
+
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 10px;
+            margin-top: 3px;
             width: 18px;
             height: 18px;
             cursor: pointer;
+            flex-shrink: 0;
         }
-        
-        .radio-option label {
-            margin: 0;
-            font-weight: 400;
+
+        .checkbox-item label {
+            display: inline;
+            font-weight: normal;
             cursor: pointer;
+            margin-bottom: 0;
         }
-        
-        .info-box {
-            margin-top: 25px;
-            padding: 20px;
-            background: #e7f3ff;
-            border: 2px solid #b3d9ff;
-            border-radius: 8px;
+
+        .radio-group {
+            margin-top: 10px;
         }
-        
-        .info-box h3 {
-            font-size: 16px;
+
+        .radio-item {
             margin-bottom: 12px;
-            color: #212529;
+            display: flex;
+            align-items: flex-start;
         }
-        
-        .info-box p {
-            font-size: 13px;
-            color: #495057;
-            line-height: 1.6;
-            margin-bottom: 8px;
+
+        .radio-item input[type="radio"] {
+            margin-right: 10px;
+            margin-top: 3px;
+            cursor: pointer;
+            flex-shrink: 0;
         }
-        
+
+        .radio-item label {
+            display: inline;
+            font-weight: normal;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+
+        .resource-allocation {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .resource-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .resource-item label {
+            margin-bottom: 0;
+            flex: 1;
+        }
+
+        .resource-item input[type="number"] {
+            width: 100px;
+            padding: 8px;
+        }
+
         .navigation {
             display: flex;
             justify-content: space-between;
             margin-top: 30px;
+            gap: 15px;
         }
-        
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1em;
             font-weight: 600;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
         }
-        
-        .btn-secondary {
-            background: #e9ecef;
-            color: #495057;
-        }
-        
-        .btn-secondary:hover:not(:disabled) {
-            background: #dee2e6;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+
+        .btn-next, .btn-submit {
+            background: linear-gradient(135deg, #16478E 0%, #0d2d5e 100%);
             color: white;
+            flex: 1;
         }
-        
-        .btn-primary:hover {
+
+        .btn-next:hover, .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.4);
+            box-shadow: 0 5px 20px rgba(22, 71, 142, 0.4);
         }
-        
-        .btn-success {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
+
+        .btn-prev {
+            background: #e0e0e0;
+            color: #333;
         }
-        
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+
+        .btn-prev:hover {
+            background: #d0d0d0;
         }
-        
-        .btn:disabled {
+
+        .btn-prev:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
-        
-        .final-instructions {
-            margin-top: 30px;
-            padding: 25px;
-            background: #fff3cd;
-            border: 2px solid #ffc107;
+
+        .summary-section {
+            background: #f8f9fa;
+            padding: 20px;
             border-radius: 8px;
+            margin-bottom: 20px;
         }
-        
-        .final-instructions h3 {
-            font-size: 18px;
+
+        .summary-section h3 {
+            color: #16478E;
             margin-bottom: 15px;
-            color: #212529;
+            font-size: 1.2em;
         }
-        
-        .final-instructions ol {
-            margin-left: 20px;
-            color: #495057;
+
+        .summary-item {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
         }
-        
-        .final-instructions li {
-            margin-bottom: 8px;
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .summary-value {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .success-message {
+            display: none;
+            background: #27ae60;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .next-steps {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .next-steps h3 {
+            color: #16478E;
+            margin-bottom: 15px;
+        }
+
+        .next-steps ol {
+            padding-left: 20px;
+        }
+
+        .next-steps li {
+            margin-bottom: 10px;
             line-height: 1.6;
         }
-        
-        .hidden {
-            display: none;
+
+        .page-indicator {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
         }
-        
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #28a745;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            z-index: 1000;
-            animation: slideIn 0.3s ease;
-        }
-        
-        @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
             }
-            to {
-                transform: translateX(0);
-                opacity: 1;
+
+            .form-content {
+                padding: 30px 20px;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
             }
         }
     </style>
@@ -277,274 +358,481 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>AI O.NE SOW Survey</h1>
-            <p>Complete this form to generate your Statement of Work documents</p>
+            <h1>Statement of Work Survey</h1>
+            <p>Complete this form to generate your customized SOW</p>
         </div>
-        
-        <div class="progress-container">
-            <div class="progress-info">
-                <span id="section-counter">Section 1 of 11</span>
-                <span id="percent-complete">9% Complete</span>
-            </div>
-            <div class="progress-bar-container">
-                <div class="progress-bar" id="progress-bar" style="width: 9%"></div>
-            </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
         </div>
-        
-        <div class="content">
-            <div id="form-sections"></div>
-            
-            <div class="navigation">
-                <button class="btn btn-secondary" id="prev-btn" onclick="previousSection()">Previous</button>
-                <button class="btn btn-primary" id="next-btn" onclick="nextSection()">Next</button>
-                <button class="btn btn-success hidden" id="copy-btn" onclick="copyFormData()">Copy Form Data</button>
-            </div>
-            
-            <div class="final-instructions hidden" id="final-instructions">
-                <h3>Next Steps:</h3>
-                <ol>
-                    <li>Click "Copy Form Data" to copy all your responses</li>
-                    <li>Open your SOW Generator GPT in Claude</li>
-                    <li>Paste the copied data</li>
-                    <li>Receive both Internal and External SOW documents</li>
-                </ol>
-            </div>
+
+        <div class="form-content">
+            <form id="sowForm">
+                <!-- Page 1: Client Information -->
+                <div class="page active" data-page="1">
+                    <div class="page-indicator">Step 1 of 6</div>
+                    <h2 class="page-title">Client Information</h2>
+                    <p class="page-subtitle">Let's start with basic client details</p>
+                    
+                    <div class="form-group">
+                        <label for="clientName">Client Name <span class="required">*</span></label>
+                        <input type="text" id="clientName" name="clientName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clientCompany">Company Name <span class="required">*</span></label>
+                        <input type="text" id="clientCompany" name="clientCompany" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clientEmail">Email Address <span class="required">*</span></label>
+                        <input type="email" id="clientEmail" name="clientEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clientPhone">Phone Number</label>
+                        <input type="tel" id="clientPhone" name="clientPhone">
+                    </div>
+
+                    <div class="navigation">
+                        <button type="button" class="btn-prev" disabled>← Previous</button>
+                        <button type="button" class="btn-next" onclick="nextPage()">Next →</button>
+                    </div>
+                </div>
+
+                <!-- Page 2: Project Overview -->
+                <div class="page" data-page="2">
+                    <div class="page-indicator">Step 2 of 6</div>
+                    <h2 class="page-title">Project Overview</h2>
+                    <p class="page-subtitle">Describe the project and its objectives</p>
+                    
+                    <div class="form-group">
+                        <label for="projectName">Project Name <span class="required">*</span></label>
+                        <input type="text" id="projectName" name="projectName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectDescription">Project Description <span class="required">*</span></label>
+                        <textarea id="projectDescription" name="projectDescription" required placeholder="Provide a detailed description of the project objectives and goals..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="currentChallenges">Current Challenges/Pain Points</label>
+                        <textarea id="currentChallenges" name="currentChallenges" placeholder="What problems is the client currently facing that this project will solve?"></textarea>
+                    </div>
+
+                    <div class="navigation">
+                        <button type="button" class="btn-prev" onclick="prevPage()">← Previous</button>
+                        <button type="button" class="btn-next" onclick="nextPage()">Next →</button>
+                    </div>
+                </div>
+
+                <!-- Page 3: Project Estimation -->
+                <div class="page" data-page="3">
+                    <div class="page-indicator">Step 3 of 6</div>
+                    <h2 class="page-title">Project Estimation</h2>
+                    <p class="page-subtitle">Help us estimate project hours and complexity</p>
+                    
+                    <div class="form-group">
+                        <label for="specialistEstimate">Your Initial Time Estimate (Hours)</label>
+                        <input type="number" id="specialistEstimate" name="specialistEstimate" min="0" step="0.5" placeholder="Your rough estimate">
+                        <div class="small-note">This is just your gut feeling - for comparison purposes only. It won't affect the final calculation.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectComplexity">Project Complexity <span class="required">*</span></label>
+                        <select id="projectComplexity" name="projectComplexity" required>
+                            <option value="">Select complexity level...</option>
+                            <option value="simple">Simple - Basic automation, 1-2 tools, straightforward workflows</option>
+                            <option value="moderate">Moderate - Multiple integrations, custom workflows, some complexity</option>
+                            <option value="complex">Complex - Advanced AI, multiple systems, custom development, high integration needs</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="coreHours">Estimated Core Project Hours <span class="required">*</span></label>
+                        <input type="number" id="coreHours" name="coreHours" min="0" step="0.5" required placeholder="Your best estimate">
+                        <div class="small-note">This is the real working time before the 50% buffer. Think: "If everything goes right, how many hours would this take?"</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Special Considerations (Check all that apply)</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="clientAvailability" name="considerations" value="Limited client availability">
+                                <label for="clientAvailability">Limited client availability or responsiveness</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="learningCurve" name="considerations" value="Significant training/learning curve">
+                                <label for="learningCurve">Significant training or learning curve for client</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="integrationComplexity" name="considerations" value="Complex system integrations">
+                                <label for="integrationComplexity">Complex system integrations or legacy systems</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="dataMigration" name="considerations" value="Data migration requirements">
+                                <label for="dataMigration">Data migration or cleanup requirements</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="customDevelopment" name="considerations" value="Custom development needs">
+                                <label for="customDevelopment">Custom development or unique requirements</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="additionalConsiderations">Additional Estimation Notes</label>
+                        <textarea id="additionalConsiderations" name="additionalConsiderations" placeholder="Any other factors that might affect project hours or complexity?"></textarea>
+                    </div>
+
+                    <div class="navigation">
+                        <button type="button" class="btn-prev" onclick="prevPage()">← Previous</button>
+                        <button type="button" class="btn-next" onclick="nextPage()">Next →</button>
+                    </div>
+                </div>
+
+                <!-- Page 4: Milestones & Deliverables -->
+                <div class="page" data-page="4">
+                    <div class="page-indicator">Step 4 of 6</div>
+                    <h2 class="page-title">Milestones & Deliverables</h2>
+                    <p class="page-subtitle">Define what will be delivered at each project phase</p>
+                    
+                    <div class="form-group">
+                        <label for="milestone30">30% Milestone Deliverables <span class="required">*</span></label>
+                        <textarea id="milestone30" name="milestone30" required placeholder="List 3-5 key deliverables for the first milestone (Discovery, scoping, early deliverables)"></textarea>
+                        <div class="small-note">Discovery phase - initial setup, scoping, and early proof of concept</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="milestone60">60% Milestone Deliverables <span class="required">*</span></label>
+                        <textarea id="milestone60" name="milestone60" required placeholder="List 3-5 key deliverables for the mid-point milestone (Build, testing, proof of concept)"></textarea>
+                        <div class="small-note">Build phase - core functionality, testing, and refinement</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="milestone90">90% Milestone Deliverables <span class="required">*</span></label>
+                        <textarea id="milestone90" name="milestone90" required placeholder="List 3-5 key deliverables for the final milestone (Delivery, refinement, polish)"></textarea>
+                        <div class="small-note">Delivery phase - final refinements, documentation, and handoff</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="outOfScope">Out of Scope Items</label>
+                        <textarea id="outOfScope" name="outOfScope" placeholder="What is explicitly NOT included in this project?"></textarea>
+                    </div>
+
+                    <div class="navigation">
+                        <button type="button" class="btn-prev" onclick="prevPage()">← Previous</button>
+                        <button type="button" class="btn-next" onclick="nextPage()">Next →</button>
+                    </div>
+                </div>
+
+                <!-- Page 5: Timeline & Resources -->
+                <div class="page" data-page="5">
+                    <div class="page-indicator">Step 5 of 6</div>
+                    <h2 class="page-title">Timeline & Resources</h2>
+                    <p class="page-subtitle">Project schedule and resource allocation</p>
+                    
+                    <div class="form-group">
+                        <label for="startDate">Proposed Start Date <span class="required">*</span></label>
+                        <input type="date" id="startDate" name="startDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endDate">Proposed End Date <span class="required">*</span></label>
+                        <input type="date" id="endDate" name="endDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Resource Allocation</label>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="useStandardAllocation" name="useStandardAllocation" checked onchange="toggleResourceAllocation()">
+                            <label for="useStandardAllocation">Use standard allocation (75% Specialist, 15% Strategist, 5% CTO, 5% Admin/PM)</label>
+                        </div>
+                        
+                        <div id="customAllocation" class="resource-allocation" style="display: none;">
+                            <p style="margin-bottom: 15px; font-weight: 600; color: #333;">Custom Resource Allocation (must total 100%):</p>
+                            <div class="resource-item">
+                                <label for="specialistPercent">Specialist %</label>
+                                <input type="number" id="specialistPercent" name="specialistPercent" min="0" max="100" value="75" step="1">
+                            </div>
+                            <div class="resource-item">
+                                <label for="strategistPercent">Strategist/AI Coach %</label>
+                                <input type="number" id="strategistPercent" name="strategistPercent" min="0" max="100" value="15" step="1">
+                            </div>
+                            <div class="resource-item">
+                                <label for="ctoPercent">CTO/Architect %</label>
+                                <input type="number" id="ctoPercent" name="ctoPercent" min="0" max="100" value="5" step="1">
+                            </div>
+                            <div class="resource-item">
+                                <label for="adminPercent">Admin/PM %</label>
+                                <input type="number" id="adminPercent" name="adminPercent" min="0" max="100" value="5" step="1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="technicalRequirements">Technical Requirements</label>
+                        <textarea id="technicalRequirements" name="technicalRequirements" placeholder="Specific tools, platforms, or technical requirements (e.g., Microsoft 365, SharePoint, Power Automate, specific APIs)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clientResponsibilities">Client Responsibilities</label>
+                        <textarea id="clientResponsibilities" name="clientResponsibilities" placeholder="What does the client need to provide or do? (e.g., access to systems, timely feedback, content provision)"></textarea>
+                    </div>
+
+                    <div class="navigation">
+                        <button type="button" class="btn-prev" onclick="prevPage()">← Previous</button>
+                        <button type="button" class="btn-next" onclick="nextPage()">Next →</button>
+                    </div>
+                </div>
+
+                <!-- Page 6: Review & Submit -->
+                <div class="page" data-page="6">
+                    <div class="page-indicator">Step 6 of 6 - Review & Submit</div>
+                    <h2 class="page-title">Review Your Information</h2>
+                    <p class="page-subtitle">Please review your responses before submitting</p>
+                    
+                    <div id="summaryContent"></div>
+
+                    <div class="form-group">
+                        <label for="additionalNotes">Additional Notes or Special Instructions</label>
+                        <textarea id="additionalNotes" name="additionalNotes" placeholder="Any other relevant information for the SOW"></textarea>
+                    </div>
+
+                    <div id="successMessage" class="success-message">
+                        Form data copied to clipboard! Follow the next steps below.
+                    </div>
+
+                    <div class="navigation">
+                        <button type="button" class="btn-prev" onclick="prevPage()">← Previous</button>
+                        <button type="button" class="btn-submit" onclick="submitForm()">Copy & Complete</button>
+                    </div>
+
+                    <div class="next-steps">
+                        <h3>Next Steps:</h3>
+                        <ol>
+                            <li>Click "Copy & Complete" to copy all your responses</li>
+                            <li><a href="https://chatgpt.com/g/g-68fb934d6cdc819197b760058a9db13b-sow-external-template" target="_blank" style="color: #16478E; font-weight: 600; text-decoration: underline;">Open your SOW Generator in ChatGPT</a></li>
+                            <li>Paste the copied data</li>
+                            <li>Receive the External SOW document</li>
+                        </ol>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
     <script>
-        const formData = {
-            projectCode: '', projectTitle: '', clientName: '', effectiveDate: '', targetCompletion: '',
-            clientGoal: '', solutionDescription: '', clientSponsor: '', clientContact: '',
-            caoName: '', pmName: '', developers: '', phase1Name: '', phase1Deliverable1: '',
-            phase1Deliverable2: '', phase1Deliverable3: '', hasPhase2: 'no', phase2Name: '',
-            phase2Deliverable1: '', phase2Deliverable2: '', outOfScope1: '', outOfScope2: '',
-            outOfScope3: '', successMetric1: '', successMetric2: '', successMetric3: '',
-            projectComplexity: '', estimatedWeeks: '', clientMustProvide: '', pilotDuration: '2-4',
-            appendixAContent: '', appendixBContent: '', appendixCContent: ''
-        };
-
-        const sections = [
-            {
-                title: "Project Basics",
-                fields: [
-                    { name: 'projectCode', label: 'Project Code', placeholder: 'e.g., CCE-0001', required: true },
-                    { name: 'projectTitle', label: 'Project Title', placeholder: 'e.g., Estimation for Cost Analysis', required: true },
-                    { name: 'clientName', label: 'Client Company Name', placeholder: 'e.g., Capitol City Electrical', required: true },
-                    { name: 'effectiveDate', label: 'Start Date', type: 'date', required: true },
-                    { name: 'targetCompletion', label: 'Target Completion Date', type: 'date', required: true }
-                ]
-            },
-            {
-                title: "Project Overview",
-                fields: [
-                    { name: 'clientGoal', label: 'What is the client trying to achieve?', placeholder: 'e.g., Reduce early bid-evaluation effort and standardize bid/no-bid decisions...', type: 'textarea', required: true },
-                    { name: 'solutionDescription', label: 'Brief solution description', placeholder: 'e.g., Two-phase decision-support solution with email automation...', type: 'textarea', required: true }
-                ]
-            },
-            {
-                title: "Project Team",
-                fields: [
-                    { name: 'clientSponsor', label: 'Client Executive Sponsor (Name & Title)', placeholder: 'e.g., Jackson Speer, Executive Sponsor', required: true },
-                    { name: 'clientContact', label: 'Client Day-to-Day Contact (Name & Title)', placeholder: 'e.g., John Roland, Project Manager', required: true },
-                    { name: 'caoName', label: 'Chief AI Officer(s)', placeholder: 'e.g., John Lund, Jason Nocita', required: true },
-                    { name: 'pmName', label: 'Project Lead/PM', placeholder: 'e.g., Mona Muralidharan', required: true },
-                    { name: 'developers', label: 'Developers/Specialists', placeholder: 'e.g., Caleb Hiatt, Minh Truong', required: true }
-                ]
-            },
-            {
-                title: "Scope - Phase 1",
-                fields: [
-                    { name: 'phase1Name', label: 'Phase 1 Name', placeholder: 'e.g., Email Triage & PDF Summarization', required: true },
-                    { name: 'phase1Deliverable1', label: 'Phase 1 - Key Deliverable 1', placeholder: 'e.g., Email triage automation implementing Easy-No rules', type: 'textarea', required: true },
-                    { name: 'phase1Deliverable2', label: 'Phase 1 - Key Deliverable 2', placeholder: 'e.g., PDF/document summarization service', type: 'textarea', required: true },
-                    { name: 'phase1Deliverable3', label: 'Phase 1 - Key Deliverable 3', placeholder: 'e.g., Reporting/logging and user guide', type: 'textarea', required: true }
-                ]
-            },
-            {
-                title: "Scope - Phase 2 (Optional)",
-                fields: [
-                    { name: 'hasPhase2', label: 'Does this project have Phase 2?', type: 'radio', options: ['yes', 'no'], required: true },
-                    { name: 'phase2Name', label: 'Phase 2 Name', placeholder: 'e.g., Cost-Estimation Assist', conditional: 'hasPhase2', conditionalValue: 'yes' },
-                    { name: 'phase2Deliverable1', label: 'Phase 2 - Key Deliverable 1', placeholder: 'e.g., Cost-estimation assist prototype', type: 'textarea', conditional: 'hasPhase2', conditionalValue: 'yes' },
-                    { name: 'phase2Deliverable2', label: 'Phase 2 - Key Deliverable 2', placeholder: 'e.g., Validation plan and training materials', type: 'textarea', conditional: 'hasPhase2', conditionalValue: 'yes' }
-                ]
-            },
-            {
-                title: "Out of Scope",
-                fields: [
-                    { name: 'outOfScope1', label: 'Out of Scope Item 1', placeholder: 'e.g., Deterministic bid-price estimation', required: true },
-                    { name: 'outOfScope2', label: 'Out of Scope Item 2', placeholder: 'e.g., Detailed takeoffs', required: true },
-                    { name: 'outOfScope3', label: 'Out of Scope Item 3', placeholder: 'e.g., Third-party integrations during Phase 1', required: true }
-                ]
-            },
-            {
-                title: "Success Criteria",
-                fields: [
-                    { name: 'successMetric1', label: 'Success Metric 1', placeholder: 'e.g., ≥50% reduction in estimator time spent on initial triage', required: true },
-                    { name: 'successMetric2', label: 'Success Metric 2', placeholder: 'e.g., ≥90% correct application of Easy-No rules', required: true },
-                    { name: 'successMetric3', label: 'Success Metric 3', placeholder: 'e.g., ≥90% field-level accuracy for summary data', required: true }
-                ]
-            },
-            {
-                title: "Project Complexity",
-                fields: [
-                    { name: 'projectComplexity', label: 'Project Complexity Level', type: 'radio', options: ['Simple', 'Moderate', 'Complex'], required: true, helpText: 'Simple: Basic automation (50-80 hrs). Moderate: Multi-phase with integrations (100-150 hrs). Complex: Advanced AI/ML with multiple systems (150+ hrs)' },
-                    { name: 'estimatedWeeks', label: 'Estimated Project Duration (weeks)', type: 'number', placeholder: '8', required: true, helpText: 'Total weeks from kickoff to final handoff' }
-                ]
-            },
-            {
-                title: "Client Responsibilities",
-                fields: [
-                    { name: 'clientMustProvide', label: 'What must the client provide?', placeholder: 'e.g., 10-15 Go/No-Go transcripts, representative bid emails, IBEW jurisdiction rules...', type: 'textarea', required: true, helpText: 'List all data, access, documents, and resources the client must provide' }
-                ]
-            },
-            {
-                title: "Testing & Pilot",
-                fields: [
-                    { name: 'pilotDuration', label: 'Pilot Duration (weeks)', placeholder: '2-4', required: true }
-                ]
-            },
-            {
-                title: "Appendices Content",
-                fields: [
-                    { name: 'appendixAContent', label: 'Appendix A - Rules/Criteria to Define', placeholder: 'e.g., List the quick "easy-no" rules for immediate triage...', type: 'textarea', required: true },
-                    { name: 'appendixBContent', label: 'Appendix B - Data Points to Extract', placeholder: 'e.g., GC name, project title, bid date/time, location...', type: 'textarea', required: true },
-                    { name: 'appendixCContent', label: 'Appendix C - API & Access Requirements', placeholder: 'e.g., Access to inbound bid email inbox, representative PDF packages...', type: 'textarea', required: true }
-                ]
-            }
-        ];
-
-        let currentSection = 0;
-
-        function renderSection() {
-            const section = sections[currentSection];
-            let html = `
-                <div class="section-header">
-                    <h2>${section.title}</h2>
-                </div>
-            `;
-
-            section.fields.forEach(field => {
-                if (field.conditional && formData[field.conditional] !== field.conditionalValue) {
-                    return;
-                }
-
-                html += `<div class="form-group">`;
-                html += `<label>${field.label} ${field.required ? '<span class="required">*</span>' : ''}</label>`;
-
-                if (field.type === 'textarea') {
-                    html += `<textarea class="form-control" id="${field.name}" placeholder="${field.placeholder || ''}" oninput="updateFormData('${field.name}', this.value)">${formData[field.name]}</textarea>`;
-                } else if (field.type === 'radio') {
-                    html += `<div class="radio-group">`;
-                    field.options.forEach(option => {
-                        const checked = formData[field.name] === option ? 'checked' : '';
-                        html += `
-                            <div class="radio-option">
-                                <input type="radio" name="${field.name}" value="${option}" ${checked} onchange="updateFormData('${field.name}', '${option}')">
-                                <label>${option.charAt(0).toUpperCase() + option.slice(1)}</label>
-                            </div>
-                        `;
-                    });
-                    html += `</div>`;
-                } else {
-                    html += `<input type="${field.type || 'text'}" class="form-control" id="${field.name}" value="${formData[field.name]}" placeholder="${field.placeholder || ''}" oninput="updateFormData('${field.name}', this.value)">`;
-                }
-
-                if (field.helpText) {
-                    html += `<div class="help-text">${field.helpText}</div>`;
-                }
-
-                html += `</div>`;
-            });
-
-            // Add info box for complexity section
-            if (currentSection === 7) {
-                html += `
-                    <div class="info-box">
-                        <h3>Complexity Guidelines</h3>
-                        <p><strong>Simple:</strong> Single-phase automation, minimal integrations (50-80 hrs)</p>
-                        <p><strong>Moderate:</strong> Multi-phase project, some integrations (100-150 hrs)</p>
-                        <p><strong>Complex:</strong> Advanced AI/ML, multiple system integrations (150+ hrs)</p>
-                        <p style="font-size: 11px; margin-top: 10px;">* The GPT will estimate detailed hours and budget based on your complexity selection</p>
-                    </div>
-                `;
-            }
-
-            document.getElementById('form-sections').innerHTML = html;
-            updateProgress();
-            updateButtons();
-        }
-
-        function updateFormData(field, value) {
-            formData[field] = value;
-            if (field === 'hasPhase2') {
-                renderSection();
-            }
-        }
+        let currentPage = 1;
+        const totalPages = 6;
 
         function updateProgress() {
-            const percent = Math.round(((currentSection + 1) / sections.length) * 100);
-            document.getElementById('section-counter').textContent = `Section ${currentSection + 1} of ${sections.length}`;
-            document.getElementById('percent-complete').textContent = `${percent}% Complete`;
-            document.getElementById('progress-bar').style.width = `${percent}%`;
+            const progress = (currentPage / totalPages) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
         }
 
-        function updateButtons() {
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            const copyBtn = document.getElementById('copy-btn');
-            const finalInstructions = document.getElementById('final-instructions');
-
-            prevBtn.disabled = currentSection === 0;
-
-            if (currentSection === sections.length - 1) {
-                nextBtn.classList.add('hidden');
-                copyBtn.classList.remove('hidden');
-                finalInstructions.classList.remove('hidden');
-            } else {
-                nextBtn.classList.remove('hidden');
-                copyBtn.classList.add('hidden');
-                finalInstructions.classList.add('hidden');
-            }
-        }
-
-        function previousSection() {
-            if (currentSection > 0) {
-                currentSection--;
-                renderSection();
-            }
-        }
-
-        function nextSection() {
-            if (currentSection < sections.length - 1) {
-                currentSection++;
-                renderSection();
-            }
-        }
-
-        function copyFormData() {
-            const text = Object.entries(formData)
-                .map(([key, value]) => `${key}: ${value}`)
-                .join('\n');
-            
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('Form data copied to clipboard!');
-            }).catch(() => {
-                alert('Form data:\n\n' + text);
+        function showPage(pageNum) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
             });
+            document.querySelector(`[data-page="${pageNum}"]`).classList.add('active');
+            currentPage = pageNum;
+            updateProgress();
+
+            // Update previous button state
+            const prevButtons = document.querySelectorAll('.btn-prev');
+            prevButtons.forEach(btn => {
+                btn.disabled = currentPage === 1;
+            });
+
+            // If on review page, generate summary
+            if (currentPage === 6) {
+                generateSummary();
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function showToast(message) {
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.textContent = message;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
+        function nextPage() {
+            if (validateCurrentPage()) {
+                if (currentPage < totalPages) {
+                    showPage(currentPage + 1);
+                }
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                showPage(currentPage - 1);
+            }
+        }
+
+        function validateCurrentPage() {
+            const currentPageElement = document.querySelector(`[data-page="${currentPage}"]`);
+            const requiredFields = currentPageElement.querySelectorAll('[required]');
+            
+            for (let field of requiredFields) {
+                if (!field.value.trim()) {
+                    field.focus();
+                    alert('Please fill in all required fields before continuing.');
+                    return false;
+                }
+            }
+
+            // Special validation for resource allocation if custom
+            if (currentPage === 5 && !document.getElementById('useStandardAllocation').checked) {
+                if (!validateResourceAllocation()) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        function validateResourceAllocation() {
+            const specialist = parseInt(document.getElementById('specialistPercent').value) || 0;
+            const strategist = parseInt(document.getElementById('strategistPercent').value) || 0;
+            const cto = parseInt(document.getElementById('ctoPercent').value) || 0;
+            const admin = parseInt(document.getElementById('adminPercent').value) || 0;
+            
+            const total = specialist + strategist + cto + admin;
+            
+            if (total !== 100) {
+                alert(`Resource allocation must total 100%. Current total: ${total}%`);
+                return false;
+            }
+            return true;
+        }
+
+        function toggleResourceAllocation() {
+            const checkbox = document.getElementById('useStandardAllocation');
+            const customDiv = document.getElementById('customAllocation');
+            customDiv.style.display = checkbox.checked ? 'none' : 'block';
+        }
+
+        function generateSummary() {
+            const form = document.getElementById('sowForm');
+            const formData = new FormData(form);
+            let summaryHTML = '';
+
+            // Client Information
+            summaryHTML += '<div class="summary-section">';
+            summaryHTML += '<h3>Client Information</h3>';
+            summaryHTML += `<div class="summary-item"><div class="summary-label">Client:</div><div class="summary-value">${formData.get('clientName')} - ${formData.get('clientCompany')}</div></div>`;
+            summaryHTML += `<div class="summary-item"><div class="summary-label">Contact:</div><div class="summary-value">${formData.get('clientEmail')} ${formData.get('clientPhone') ? '| ' + formData.get('clientPhone') : ''}</div></div>`;
+            summaryHTML += '</div>';
+
+            // Project Overview
+            summaryHTML += '<div class="summary-section">';
+            summaryHTML += '<h3>Project Overview</h3>';
+            summaryHTML += `<div class="summary-item"><div class="summary-label">Project Name:</div><div class="summary-value">${formData.get('projectName')}</div></div>`;
+            summaryHTML += `<div class="summary-item"><div class="summary-label">Description:</div><div class="summary-value">${formData.get('projectDescription')}</div></div>`;
+            summaryHTML += '</div>';
+
+            // Project Estimation
+            summaryHTML += '<div class="summary-section">';
+            summaryHTML += '<h3>Project Estimation</h3>';
+            summaryHTML += `<div class="summary-item"><div class="summary-label">Your Initial Estimate:</div><div class="summary-value">${formData.get('specialistEstimate') || 'Not provided'} hours</div></div>`;
+            summaryHTML += `<div class="summary-item"><div class="summary-label">Complexity:</div><div class="summary-value">${formData.get('projectComplexity')}</div></div>`;
+            summaryHTML += `<div class="summary-item"><div class="summary-label">Core Hours:</div><div class="summary-value">${formData.get('coreHours')} hours</div></div>`;
+            
+            const considerations = Array.from(document.querySelectorAll('input[name="considerations"]:checked')).map(cb => cb.value);
+            if (considerations.length > 0) {
+                summaryHTML += `<div class="summary-item"><div class="summary-label">Special Considerations:</div><div class="summary-value">${considerations.join(', ')}</div></div>`;
+            }
+            summaryHTML += '</div>';
+
+            // Timeline
+            summaryHTML += '<div class="summary-section">';
+            summaryHTML += '<h3>Timeline</h3>';
+            summaryHTML += `<div class="summary-item"><div class="summary-label">Project Duration:</div><div class="summary-value">${formData.get('startDate')} to ${formData.get('endDate')}</div></div>`;
+            summaryHTML += '</div>';
+
+            document.getElementById('summaryContent').innerHTML = summaryHTML;
+        }
+
+        function submitForm() {
+            const form = document.getElementById('sowForm');
+            const formData = new FormData(form);
+            let output = "=== AUTOGRATOR STATEMENT OF WORK - SURVEY DATA ===\n\n";
+
+            // Client Information
+            output += "CLIENT INFORMATION:\n";
+            output += `Client Name: ${formData.get('clientName') || 'N/A'}\n`;
+            output += `Company Name: ${formData.get('clientCompany') || 'N/A'}\n`;
+            output += `Email: ${formData.get('clientEmail') || 'N/A'}\n`;
+            output += `Phone: ${formData.get('clientPhone') || 'N/A'}\n\n`;
+
+            // Project Overview
+            output += "PROJECT OVERVIEW:\n";
+            output += `Project Name: ${formData.get('projectName') || 'N/A'}\n`;
+            output += `Description: ${formData.get('projectDescription') || 'N/A'}\n`;
+            output += `Current Challenges: ${formData.get('currentChallenges') || 'N/A'}\n\n`;
+
+            // Project Estimation
+            output += "PROJECT ESTIMATION & PLANNING:\n";
+            output += `Specialist's Initial Estimate: ${formData.get('specialistEstimate') || 'Not provided'} hours\n`;
+            output += `Project Complexity: ${formData.get('projectComplexity') || 'N/A'}\n`;
+            output += `Estimated Core Hours: ${formData.get('coreHours') || 'N/A'} hours\n`;
+            
+            // Special Considerations
+            const considerations = Array.from(document.querySelectorAll('input[name="considerations"]:checked')).map(cb => cb.value);
+            output += `Special Considerations: ${considerations.length > 0 ? considerations.join(', ') : 'None'}\n`;
+            output += `Additional Notes: ${formData.get('additionalConsiderations') || 'N/A'}\n\n`;
+
+            // Milestones & Deliverables
+            output += "MILESTONES & DELIVERABLES:\n";
+            output += `30% Milestone Deliverables: ${formData.get('milestone30') || 'N/A'}\n`;
+            output += `60% Milestone Deliverables: ${formData.get('milestone60') || 'N/A'}\n`;
+            output += `90% Milestone Deliverables: ${formData.get('milestone90') || 'N/A'}\n`;
+            output += `Out of Scope: ${formData.get('outOfScope') || 'N/A'}\n\n`;
+
+            // Timeline & Resources
+            output += "TIMELINE & RESOURCES:\n";
+            output += `Start Date: ${formData.get('startDate') || 'N/A'}\n`;
+            output += `End Date: ${formData.get('endDate') || 'N/A'}\n`;
+            
+            // Resource Allocation
+            const useStandard = document.getElementById('useStandardAllocation').checked;
+            if (useStandard) {
+                output += `Resource Allocation: Standard (75% Specialist, 15% Strategist, 5% CTO, 5% Admin/PM)\n`;
+            } else {
+                output += `Resource Allocation: Custom\n`;
+                output += `  - Specialist: ${formData.get('specialistPercent') || 'N/A'}%\n`;
+                output += `  - Strategist/AI Coach: ${formData.get('strategistPercent') || 'N/A'}%\n`;
+                output += `  - CTO/Architect: ${formData.get('ctoPercent') || 'N/A'}%\n`;
+                output += `  - Admin/PM: ${formData.get('adminPercent') || 'N/A'}%\n`;
+            }
+            
+            output += `Technical Requirements: ${formData.get('technicalRequirements') || 'N/A'}\n`;
+            output += `Client Responsibilities: ${formData.get('clientResponsibilities') || 'N/A'}\n\n`;
+
+            // Additional Information
+            output += "ADDITIONAL INFORMATION:\n";
+            output += `Additional Notes: ${formData.get('additionalNotes') || 'N/A'}\n\n`;
+
+            output += "=== END OF SURVEY DATA ===\n\n";
+            output += "INSTRUCTIONS FOR GPT:\n";
+            output += "Using the framework provided, calculate:\n";
+            output += "1. Total client-facing hours (Core Hours + 50% buffer)\n";
+            output += "2. Hours allocated per milestone (30%, 60%, 90%)\n";
+            output += "3. Resource distribution per milestone based on allocation percentages\n";
+            output += "4. Generate external-facing Statement of Work with professional formatting";
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(output).then(() => {
+                const successMsg = document.getElementById('successMessage');
+                successMsg.style.display = 'block';
+                setTimeout(() => {
+                    successMsg.style.display = 'none';
+                }, 5000);
+            });
         }
 
         // Initialize
-        renderSection();
+        updateProgress();
     </script>
 </body>
 </html>
